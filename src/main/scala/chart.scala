@@ -18,6 +18,7 @@ object linechart {
   import scalax.chart.Charting._
   import org.jfree.ui.RectangleEdge
   import java.awt.Color
+  import helper.Config.CHARTDATA
 
   def main(args: Array[String]) = {
     val data = Seq((1, 2), (2, 4), (3, 6), (4, 8), (5, 10))
@@ -35,7 +36,7 @@ object linechart {
     plot.setDomainGridlinePaint(Color.blue)
     plot.setRangeGridlinePaint(Color.blue)
     lChart.show
-    lChart.saveAsPDF("r:/linechart.pdf", (500, 375))
+    lChart.saveAsPDF(CHARTDATA + "/linechart.pdf", (500, 375))
   }
 }
 
@@ -44,6 +45,7 @@ object multilinechart {
   import org.jfree.ui.RectangleEdge
   import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer
   import java.awt.Color
+  import helper.Config.CHARTDATA
 
   def main(args: Array[String]) = {
     val dataA = Seq((1, 2), (2, 4), (3, 6), (4, 8), (5, 10))
@@ -64,7 +66,7 @@ object multilinechart {
     plot.setRangeGridlinePaint(Color.lightGray)
     plot.setRenderer(new XYLineAndShapeRenderer)
     lChart.show
-    lChart.saveAsPDF("r:/multilinechart.pdf", (500, 375))
+    lChart.saveAsPDF(CHARTDATA + "/multilinechart.pdf", (500, 375))
   }
 }
 
@@ -72,6 +74,8 @@ object barchart {
   import scalax.chart.Charting._
   import org.jfree.ui.RectangleEdge
   import java.awt.Color
+  import helper.RenderEx.PatternRenderer
+  import helper.Config.CHARTDATA
 
   def main(args: Array[String]) = {
     val data = Seq(
@@ -89,9 +93,9 @@ object barchart {
     val plot = bChart.plot
     plot.setBackgroundPaint(Color.white)
     plot.setRangeGridlinePaint(Color.blue)
-    plot.setRenderer(new helper.pattern.Renderer)
+    plot.setRenderer(new PatternRenderer)
     bChart.show
-    bChart.saveAsPDF("r:/barchart.pdf", (500, 375))
+    bChart.saveAsPDF(CHARTDATA + "/barchart.pdf", (500, 375))
   }
 }
 
@@ -99,6 +103,8 @@ object multibarchart {
   import scalax.chart.Charting._
   import org.jfree.ui.RectangleEdge
   import java.awt.Color
+  import helper.RenderEx.PatternRenderer
+  import helper.Config.CHARTDATA
 
   def main(args: Array[String]) = {
     val data = List(
@@ -115,8 +121,8 @@ object multibarchart {
     val plot = bChart.plot
     plot.setBackgroundPaint(Color.white)
     plot.setRangeGridlinePaint(Color.lightGray)
-    plot.setRenderer(new helper.pattern.Renderer)
+    plot.setRenderer(new PatternRenderer)
     bChart.show
-    bChart.saveAsPDF("r:/multibarchart.pdf", (500, 375))
+    bChart.saveAsPDF(CHARTDATA + "/multibarchart.pdf", (500, 375))
   }
 }

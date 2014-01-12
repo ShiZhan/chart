@@ -1,18 +1,21 @@
 /**
- * pattern filling for rendering in gray scale graphics
+ * More renderers
  */
 package helper
 
 /**
  * @author ShiZhan
- * available patterns:
- * 0: '\', 1: '_', 2: '/', 3: '|', 4: '.', 5: '-'
+ * More renderers
  */
-object pattern {
+object RenderEx {
   import java.awt.{ Color, Rectangle, TexturePaint }
   import java.awt.image.BufferedImage
   import org.jfree.chart.renderer.category.{ BarRenderer, StandardBarPainter }
 
+/**
+ * pattern filling for rendering in gray scale graphics:
+ * 0: '\', 1: '_', 2: '/', 3: '|', 4: '.', 5: '-'
+ */
   val Fill = Array(
     (0, 0, 5, 5), (0, 0, 5, 0), (0, 5, 5, 0),
     (0, 0, 0, 5), (0, 0, 0, 0), (1, 1, 3, 3)) map {
@@ -28,7 +31,7 @@ object pattern {
       }
     }
 
-  class Renderer extends BarRenderer {
+  class PatternRenderer extends BarRenderer {
     setBarPainter(new StandardBarPainter)
     setShadowVisible(false)
     setDrawBarOutline(true)

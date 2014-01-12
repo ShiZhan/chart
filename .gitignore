@@ -2,6 +2,9 @@
 *.log
 *.jar
 
+# chart data
+.chart/*
+
 # sbt specific
 dist/*
 target/
