@@ -1,7 +1,7 @@
 /**
  * pattern filling for rendering in gray scale graphics
  */
-package util
+package helper
 
 /**
  * @author ShiZhan
