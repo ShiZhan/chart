@@ -18,10 +18,9 @@ import scalax.chart.api._
 import org.jfree.ui.RectangleEdge
 import java.awt.Color
 import util.Random
+import helper.Config.CHARTDATA
 
 object linechart {
-  import helper.Config.CHARTDATA
-
   def main(args: Array[String]) = {
     val data = Vector("Y" -> Vector.tabulate(5)((_, Random.nextInt(10))))
     val lChart = XYLineChart(data)
@@ -41,7 +40,6 @@ object linechart {
 
 object multilinechart {
   import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer
-  import helper.Config.CHARTDATA
 
   def main(args: Array[String]) = {
     val dataA = Vector.tabulate(9)(i => (i, i))
@@ -63,7 +61,6 @@ object multilinechart {
 
 object barchart {
   import helper.RenderEx.PatternRenderer
-  import helper.Config.CHARTDATA
 
   def main(args: Array[String]) = {
     val data = Vector("s0" -> Vector.tabulate(5)(i => ((i + 'A').toChar, Random.nextInt(10))))
@@ -84,7 +81,6 @@ object barchart {
 
 object multibarchart {
   import helper.RenderEx.PatternRenderer
-  import helper.Config.CHARTDATA
 
   def main(args: Array[String]) = {
     val data = Vector(
