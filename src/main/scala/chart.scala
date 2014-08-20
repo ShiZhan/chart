@@ -17,18 +17,16 @@
 import scalax.chart.api._
 import org.jfree.ui.RectangleEdge
 import java.awt.Color
+import util.Random
 
 object linechart {
   import helper.Config.CHARTDATA
 
   def main(args: Array[String]) = {
-    val data = Seq((1, 2), (2, 4), (3, 6), (4, 8), (5, 10))
-    val dataset = data.toXYSeriesCollection("some points")
-    val lChart = XYLineChart(
-      dataset,
-      title = "Example Chart")
-//    lChart.plot.domain.axis.label.text = "X"
-//    lChart.plot.range.axis.label.text = "Y"
+    val data = Vector("Y" -> Vector.tabulate(5)((_, Random.nextInt(10))))
+    val lChart = XYLineChart(data)
+    lChart.plot.getDomainAxis.setLabel("X")
+    lChart.plot.getRangeAxis.setLabel("Y")
     val jfc = lChart.peer
     jfc.getLegend.setPosition(RectangleEdge.RIGHT)
     jfc.setBackgroundPaint(Color.white)
@@ -41,33 +39,28 @@ object linechart {
   }
 }
 
-//object multilinechart {
-//  import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer
-//  import helper.Config.CHARTDATA
-//
-//  def main(args: Array[String]) = {
-//    val dataA = Seq((1, 2), (2, 4), (3, 6), (4, 8), (5, 10))
-//    val dsA = dataA.toXYSeries("Line A")
-//    val dataB = Seq((1, 10), (2, 8), (3, 6), (4, 4), (5, 2))
-//    val dsB = dataB.toXYSeries("Line B")
-//    val dataset = List(dsA, dsB).toXYSeriesCollection
-//    val lChart = XYLineChart(
-//      dataset,
-//      domainAxisLabel = "X",
-//      rangeAxisLabel = "Y")
-//    val jfc = lChart.peer
-//    jfc.getLegend.setPosition(RectangleEdge.RIGHT)
-//    jfc.backgroundPaint = Color.white
-//    val plot = lChart.plot
-//    plot.setBackgroundPaint(Color.white)
-//    plot.setDomainGridlinePaint(Color.lightGray)
-//    plot.setRangeGridlinePaint(Color.lightGray)
-//    plot.setRenderer(new XYLineAndShapeRenderer)
-//    lChart.show
-//    lChart.saveAsPDF(CHARTDATA + "/multilinechart.pdf", (500, 375))
-//  }
-//}
-//
+object multilinechart {
+  import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer
+  import helper.Config.CHARTDATA
+
+  def main(args: Array[String]) = {
+    val dataA = Vector.tabulate(9)(i => (i, i))
+    val dataB = Vector.tabulate(9)(i => (i, 9 - i))
+    val data = Vector("Line A" -> dataA, "Line B" -> dataB)
+    val lChart = XYLineChart(data)
+    val jfc = lChart.peer
+    jfc.getLegend.setPosition(RectangleEdge.RIGHT)
+    jfc.setBackgroundPaint(Color.white)
+    val plot = lChart.plot
+    plot.setBackgroundPaint(Color.white)
+    plot.setDomainGridlinePaint(Color.lightGray)
+    plot.setRangeGridlinePaint(Color.lightGray)
+    plot.setRenderer(new XYLineAndShapeRenderer)
+    lChart.show("Example Chart", (500, 375), false)
+    lChart.saveAsPDF(CHARTDATA + "/multilinechart.pdf", (500, 375))
+  }
+}
+
 //object barchart {
 //  import helper.RenderEx.PatternRenderer
 //  import helper.Config.CHARTDATA
