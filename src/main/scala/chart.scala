@@ -60,23 +60,26 @@ object multilinechart {
 }
 
 object areachart {
+  import helper.RenderEx.GrayStackedAreaRenderer
+
+  def randomVector = Vector.tabulate(9)(i => (i, Random.nextInt(10)))
+
   def main(args: Array[String]) = {
-    val dataA = Vector.tabulate(9)(i => (i, Random.nextInt(10)))
-    val dataB = Vector.tabulate(9)(i => (i, Random.nextInt(10)))
-    val data = Vector("Line A" -> dataA, "Line B" -> dataB)
+    val data = Vector("A" -> randomVector, "B" -> randomVector, "C" -> randomVector, "D" -> randomVector)
     val chart = AreaChart.stacked(data)
     val jfc = chart.peer
     jfc.getLegend.setPosition(RectangleEdge.RIGHT)
     jfc.setBackgroundPaint(Color.white)
     val plot = chart.plot
     plot.setBackgroundPaint(Color.white)
+    plot.setRenderer(new GrayStackedAreaRenderer)
     chart.show("Example Chart", (500, 375), false)
     chart.saveAsPDF(CHARTDATA + "/areachart.pdf", (500, 375))
   }
 }
 
 object barchart {
-  import helper.RenderEx.PatternRenderer
+  import helper.RenderEx.BarPatternRenderer
 
   def main(args: Array[String]) = {
     val data = Vector("s0" -> Vector.tabulate(5)(i => ((i + 'A').toChar, Random.nextInt(10))))
@@ -89,14 +92,14 @@ object barchart {
     val plot = bChart.plot
     plot.setBackgroundPaint(Color.white)
     plot.setRangeGridlinePaint(Color.blue)
-    plot.setRenderer(new PatternRenderer)
+    plot.setRenderer(new BarPatternRenderer)
     bChart.show("Example Chart of Some Bars", (500, 375), false)
     bChart.saveAsPDF(CHARTDATA + "/barchart.pdf", (500, 375))
   }
 }
 
 object multibarchart {
-  import helper.RenderEx.PatternRenderer
+  import helper.RenderEx.BarPatternRenderer
 
   def main(args: Array[String]) = {
     val data = Vector(
@@ -111,7 +114,7 @@ object multibarchart {
     val plot = bChart.plot
     plot.setBackgroundPaint(Color.white)
     plot.setRangeGridlinePaint(Color.lightGray)
-    plot.setRenderer(new PatternRenderer)
+    plot.setRenderer(new BarPatternRenderer)
     bChart.show("Example Chart of Some Bars", (500, 375), false)
     bChart.saveAsPDF(CHARTDATA + "/multibarchart.pdf", (500, 375))
   }
