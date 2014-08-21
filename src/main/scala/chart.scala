@@ -59,6 +59,22 @@ object multilinechart {
   }
 }
 
+object areachart {
+  def main(args: Array[String]) = {
+    val dataA = Vector.tabulate(9)(i => (i, Random.nextInt(10)))
+    val dataB = Vector.tabulate(9)(i => (i, Random.nextInt(10)))
+    val data = Vector("Line A" -> dataA, "Line B" -> dataB)
+    val chart = AreaChart.stacked(data)
+    val jfc = chart.peer
+    jfc.getLegend.setPosition(RectangleEdge.RIGHT)
+    jfc.setBackgroundPaint(Color.white)
+    val plot = chart.plot
+    plot.setBackgroundPaint(Color.white)
+    chart.show("Example Chart", (500, 375), false)
+    chart.saveAsPDF(CHARTDATA + "/areachart.pdf", (500, 375))
+  }
+}
+
 object barchart {
   import helper.RenderEx.PatternRenderer
 
@@ -98,5 +114,20 @@ object multibarchart {
     plot.setRenderer(new PatternRenderer)
     bChart.show("Example Chart of Some Bars", (500, 375), false)
     bChart.saveAsPDF(CHARTDATA + "/multibarchart.pdf", (500, 375))
+  }
+}
+
+object piechart {
+  def main(args: Array[String]) = {
+    val data = Vector.tabulate(8)(i => ((i + 'A').toChar, Random.nextInt(10)))
+    val chart = PieChart(data)
+    val jfc = chart.peer
+    jfc.getLegend.setPosition(RectangleEdge.RIGHT)
+    jfc.setBackgroundPaint(Color.white)
+    val plot = chart.plot
+    plot.setBackgroundPaint(Color.white)
+    plot.setShadowPaint(Color.white)
+    chart.show("Example Pie Chart", (500, 375), false)
+    chart.saveAsPDF(CHARTDATA + "/piechart.pdf", (500, 375))
   }
 }
